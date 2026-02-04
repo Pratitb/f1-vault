@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // base: '/<projectName>',
+  base: '/f1-vault',
   plugins: [react()],
   server: {
     proxy: {

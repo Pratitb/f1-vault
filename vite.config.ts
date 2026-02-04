@@ -17,6 +17,7 @@ export default defineConfig({
 })
 
 
+
 // Vite dev server config. Used to fix CORS error during development
 
 //server: {} this configures the local dev server

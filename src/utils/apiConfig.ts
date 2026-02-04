@@ -1,0 +1,1 @@
+export const baseUrl = `https://f1api.dev/api/`

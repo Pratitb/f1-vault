@@ -1,11 +1,14 @@
+import { useNavigate } from 'react-router-dom'
 import { useCommon } from '../context/Common/CommonContext'
 import { menuLinks } from '../utils/staticTxt'
 import type { MenuLinkType } from '../utils/types'
 
 const Menu = () => {
     const { activeMenu, updateActiveMenu } = useCommon()
+    const navigate = useNavigate()
     const handleActiveMenuItem = (menuItem: string) => {
         updateActiveMenu?.(menuItem)
+        navigate?.(`/${menuItem}`)
     }
     return (
         <div className='flex gap-2 max-w-fit overflow-x-auto'>

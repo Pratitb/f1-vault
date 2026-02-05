@@ -43,11 +43,11 @@
   }
 
   .cards-row {
-    @apply flex flex-col items-center gap-4 md:flex-row md:flex-wrap md:justify-center;
+    @apply flex flex-col items-center gap-4 md:flex-row md:flex-wrap md:justify-center lg:justify-start lg:items-stretch;
   }
 
   .card-row {
-    @apply md:basis-[48%] lg:basis-[32%];
+    @apply md:basis-[48%] lg:basis-[30%];
   }
 }
 

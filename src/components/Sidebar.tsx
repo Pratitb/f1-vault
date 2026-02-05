@@ -2,14 +2,19 @@ import { Logo } from '../utils/assets'
 import { menuLinks } from '../utils/staticTxt'
 import type { MenuLinkType } from '../utils/types'
 import { useCommon } from '../context/Common/CommonContext'
+import { useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
     const { activeMenu, updateActiveMenu } = useCommon()
+    const navigate = useNavigate()
+
     const handleActiveMenuItem = (menuItem: string) => {
         updateActiveMenu?.(menuItem)
+        navigate?.(`/${menuItem}`)
     }
+
     return (
-        <div className='w-full max-w-[200px] flex flex-col flex-1 gap-8 shadow-soft rounded-lg p-4 border-red'>
+        <div className='w-full max-w-[200px] flex flex-col flex-1 gap-8 shadow-soft rounded-lg p-4 border-t-4 border-red'>
             <img src={Logo} alt="" />
             <div className='flex flex-col gap-4'>
                 {menuLinks?.map?.((link: MenuLinkType) => <div key={link?.name} className={`bg-gray-100 text-xl font-medium capitalize px-4 py-2 border rounded-lg cursor-pointer ${activeMenu?.includes?.(link?.name ?? '') ? 'border border-red text-red bg-white ' : ''}`} onClick={() => handleActiveMenuItem?.(link?.name ?? 'races')}>

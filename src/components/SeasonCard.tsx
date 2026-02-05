@@ -8,7 +8,7 @@ const SeasonCard = ({ year, name, url }: SeasonCardProps) => {
             <p>{year}</p>
             <p className="card_main_text mb-3">{name}</p>
             <div className="flex items-center gap-1">
-                <Link to={url ?? '/'} target="_blank" className="text-primary text-sm capitalize underline">visit wiki</Link>
+                <Link to={url ?? '/'} target="_blank" className="text-primary text-sm capitalize">visit</Link>
                 <MdArrowOutward />
             </div>
         </div>

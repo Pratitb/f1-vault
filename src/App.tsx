@@ -65,6 +65,7 @@ const App = () => {
           {isMobile && <Menu />}
           <div ref={main} style={{ maxHeight: availableHeight, overflow: 'hidden auto' }}>
             <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path='/races' element={<Races getCurrentError={isCurrentError} getCurrentLoading={isCurrentLoading} getRaceData={raceData} getSeasonYear={seasonYear} />} />
               <Route path='/drivers' element={<Drivers getDriversData={drivers} getDriversError={isDriversError} getDriversLoading={isDriversLoading} />} />

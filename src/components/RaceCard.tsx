@@ -1,10 +1,9 @@
 import { FaFlagCheckered } from "react-icons/fa"
 import type { RaceCompProps } from "../utils/types"
 
-const Race = ({ year, round, laps, location, name, winner }: RaceCompProps) => {
+const RaceCard = ({ year, round, laps, location, name, winner }: RaceCompProps) => {
     return (
-        <div className="flex w-full gap-4 md:basis-[48%] lg:basis-[32%]">
-            <p className="text-primary font-bold">{round}.</p>
+        <div className="flex w-full gap-4 md:basis-[48%] lg:basis-[31%] xl:basis-[32%]">
             <div className=" flex flex-col  bg-gray-100 rounded-lg text-primary p-4 flex-1">
                 {/* year, round, laps */}
                 <div className="flex justify-between">
@@ -29,4 +28,4 @@ const Race = ({ year, round, laps, location, name, winner }: RaceCompProps) => {
     )
 }
 
-export default Race
+export default RaceCard

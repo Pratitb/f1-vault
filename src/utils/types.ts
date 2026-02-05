@@ -210,3 +210,7 @@ export interface SeasonCardProps {
     name?: string
     url?: string
 }
+
+export interface BannerProps {
+    name?: string
+}

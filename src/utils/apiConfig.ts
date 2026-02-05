@@ -1,1 +1,1 @@
-export const baseUrl = `https://f1api.dev/api/`
+export const baseUrl = import.meta.env.DEV ? '/f1/api' : 'https://f1api.dev/api';

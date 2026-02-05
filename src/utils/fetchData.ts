@@ -1,5 +1,7 @@
+import { baseUrl } from "./apiConfig"
+
 export const getData = async <DataType>(endPoint: string): Promise<DataType> => {
-    const response = await fetch(`/f1/api/${endPoint}`)
+    const response = await fetch(`${baseUrl}/${endPoint}`)
 
     if (!response.ok) {
         throw new Error('Failed to fetch')

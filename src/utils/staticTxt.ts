@@ -2,6 +2,10 @@ export const racesError = `Failed to fetch races. Please try again later`
 
 export const menuLinks = [
     {
+        name: 'home',
+        icon: '',
+    },
+    {
         name: 'races',
         icon: '',
     },
@@ -10,7 +14,7 @@ export const menuLinks = [
         icon: ''
     },
     {
-        name: 'past seasons',
+        name: 'seasons',
         icon: ''
     },
 ]

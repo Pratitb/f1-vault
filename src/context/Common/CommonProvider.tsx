@@ -3,7 +3,7 @@ import type { ContextProps } from "../../utils/types"
 import { CommonContext } from "./CommonContext"
 
 export const CommonProvider = ({ children }: ContextProps) => {
-    const [activeMenu, setActiveMenu] = useState('races')
+    const [activeMenu, setActiveMenu] = useState('home')
     const updateActiveMenu = (value: string) => {
         setActiveMenu(value)
     }

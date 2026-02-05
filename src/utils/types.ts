@@ -214,3 +214,21 @@ export interface SeasonCardProps {
 export interface BannerProps {
     name?: string
 }
+export interface RacePageProps {
+    getRaceData?: RaceType[]
+    getCurrentLoading?: boolean
+    getCurrentError?: boolean
+    getSeasonYear?: number
+}
+
+export interface DriversPageProps {
+    getDriversData?: DriverType[]
+    getDriversLoading?: boolean
+    getDriversError?: boolean
+}
+
+export interface SeasonsPageProps {
+    getSeaonsData?: Championship[]
+    getSeasonsLoading?: boolean
+    getSeasonsError?: boolean
+}

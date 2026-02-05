@@ -8,16 +8,16 @@ export const useAvailableHeight = (element: React.RefObject<HTMLElement | null>,
 
         const calculateAvailableHeight = () => {
             const screenHeight = window.innerHeight
-            console.log(screenHeight, 'screenHeight')
-
             const elementTop = element?.current?.getBoundingClientRect()?.top ?? 20
-            console.log(elementTop, 'elementTop')
 
             const getAvailableHeight = screenHeight - elementTop - bottomPad
             setAvailableHeight(getAvailableHeight)
         }
 
         calculateAvailableHeight()
+
+        window.addEventListener('resize', calculateAvailableHeight)
+        return () => window.removeEventListener('resize', calculateAvailableHeight)
 
     }, [bottomPad, element])
 

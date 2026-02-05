@@ -16,7 +16,7 @@ import Seasons from "./pages/Seasons";
 import Home from "./pages/Home";
 
 const App = () => {
-  const { activeMenu, updateActiveMenu } = useCommon()
+  const { selectedYear, activeMenu, updateActiveMenu } = useCommon()
   const main = useRef<HTMLDivElement | null>(null)
   const availableHeight = useAvailableHeight(main, 20)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
@@ -31,7 +31,8 @@ const App = () => {
   // RACES
   const { data: currentData, isLoading: isCurrentLoading, isError: isCurrentError } = useQuery<SeasonDataProps>({
     queryKey: ['current-season'],
-    queryFn: () => getData<SeasonDataProps>('current'),
+    queryFn: () => getData<SeasonDataProps>(`${selectedYear}`),
+    // queryFn: () => getData<SeasonDataProps>('current'),
     enabled: activeMenu?.includes('races')
   })
   const seasonYear = currentData?.season
@@ -40,12 +41,12 @@ const App = () => {
   // DRIVERS
   const { data: driversData, isLoading: isDriversLoading, isError: isDriversError } = useQuery<DriversDataType>({
     queryKey: ['drivers'],
-    queryFn: () => getData<DriversDataType>('current/drivers'),
+    queryFn: () => getData<DriversDataType>(`${selectedYear}/drivers`),
     enabled: activeMenu?.includes('drivers')
   })
   const drivers = driversData?.drivers
 
-  // PAST SEASONS
+  // SEASONS
   const { data: seasonsData, isLoading: isSeasonsLoading, isError: isSeasonsError } = useQuery<PastSeasonType>({
     queryKey: ['past-seasons'],
     queryFn: () => getData<PastSeasonType>('seasons'),

@@ -18,3 +18,11 @@ export const menuLinks = [
         icon: ''
     },
 ]
+
+
+export const seasonYears: number[] = []
+const current = new Date()?.getFullYear()
+
+for (let index = current - 1; index > 1996; index--) {
+    seasonYears?.push(index)
+}

@@ -7,8 +7,16 @@ export const CommonProvider = ({ children }: ContextProps) => {
     const updateActiveMenu = (value: string) => {
         setActiveMenu(value)
     }
+
+    const currentYear = new Date()?.getFullYear()
+    const [selectedYear, setSelectedYear] = useState(currentYear)
+
+    const updateSelectedYear = (year: number) => {
+        setSelectedYear(year)
+    }
+
     return (
-        <CommonContext.Provider value={{ activeMenu, updateActiveMenu }}>
+        <CommonContext.Provider value={{ selectedYear, updateSelectedYear, activeMenu, updateActiveMenu }}>
             {children}
         </CommonContext.Provider>
     )

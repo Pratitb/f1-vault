@@ -201,6 +201,8 @@ export interface MenuLinkType {
 }
 
 export interface CommonContextProps {
+    selectedYear?: number
+    updateSelectedYear?: (year: number) => void
     activeMenu?: string
     updateActiveMenu?: (value: string) => void
 }

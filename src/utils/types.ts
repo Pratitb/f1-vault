@@ -232,3 +232,9 @@ export interface SeasonsPageProps {
     getSeasonsLoading?: boolean
     getSeasonsError?: boolean
 }
+
+export interface MenuItemProps {
+    linkName?: string
+    getActionFn: () => void
+    linkIcon?: ReactNode
+}

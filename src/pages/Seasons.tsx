@@ -8,7 +8,6 @@ const Seasons = ({ getSeaonsData, getSeasonsLoading, getSeasonsError }: SeasonsP
     const { activeMenu } = useCommon()
     return (
         <>
-            {/* PAST SEASONS */}
             {getSeaonsData && activeMenu?.includes('seasons') &&
                 <div className="cards-row">
                     {getSeasonsLoading ? <Loader sizeVal={40} /> : getSeasonsError ? <ErrorMsg /> : getSeaonsData?.slice(1)?.map?.((season: Championship) => <SeasonCard key={season?.championshipId} name={season?.championshipName} url={season?.url} year={season?.year} />)}

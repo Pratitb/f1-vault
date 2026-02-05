@@ -24,7 +24,6 @@ const App = () => {
 
   useEffect(() => {
     const path = location.pathname.replace('/', '') || 'home'
-    console.log(path, 'path')
     updateActiveMenu?.(path)
   })
 

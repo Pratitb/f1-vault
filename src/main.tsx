@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <GlobalContext>
-        <BrowserRouter>
+        <BrowserRouter basename='/f1-vault'>
           <App />
         </BrowserRouter>
       </GlobalContext>

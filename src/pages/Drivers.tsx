@@ -11,7 +11,7 @@ const Drivers = ({ getDriversData, getDriversLoading, getDriversError }: Drivers
         <>
             {getDriversData && activeMenu?.includes('drivers') &&
                 <div className="cards-row">
-                    {getDriversLoading ? <Loader sizeVal={40} /> : getDriversError ? <ErrorMsg errorMsg={racesError} color="red" /> : getDriversData && getDriversData?.map((driver: DriverType) => <DriverCard key={driver?.driverId} fullName={`${driver?.name} ${driver?.surname}`} nation={driver?.nationality} number={driver?.number} shortName={driver?.shortName} team={driver?.teamId} />)}
+                    {getDriversLoading ? <Loader sizeVal={40} /> : getDriversError ? <ErrorMsg errorMsg={racesError} color="red" /> : getDriversData && getDriversData?.map((driver: DriverType) => <DriverCard key={driver?.driverId} fullName={`${driver?.name} ${driver?.surname}`} nation={driver?.nationality} number={driver?.number ?? 'NA'} shortName={driver?.shortName} team={driver?.teamId} />)}
                 </div>
             }
         </>

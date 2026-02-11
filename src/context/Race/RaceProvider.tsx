@@ -6,6 +6,11 @@ export const RaceProvider = ({ children }: ContextProps) => {
   const [seasonData, setSeasonData] = useState<SeasonDataProps>()
   const [raceData, setRaceData] = useState<RaceType[]>([])
   const [seasonYear, setSeasonYear] = useState<number>()
+  const [raceRound, setRaceRound] = useState<number | null>(null)
+
+  const updateRaceRound = (round: number | null) => {
+    setRaceRound(round)
+  }
 
   const updateSeasonData = (data: SeasonDataProps) => {
     setSeasonData(data)
@@ -17,7 +22,7 @@ export const RaceProvider = ({ children }: ContextProps) => {
     setSeasonYear(value)
   }
   return (
-    <RaceContext.Provider value={{ seasonYear, updateSeasonYear, seasonData, raceData, updateSeasonData, updateRaceData }}>
+    <RaceContext.Provider value={{ raceRound, updateRaceRound, seasonYear, updateSeasonYear, seasonData, raceData, updateSeasonData, updateRaceData }}>
       {children}
     </RaceContext.Provider>
   )

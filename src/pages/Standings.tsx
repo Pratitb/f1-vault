@@ -5,8 +5,12 @@ import { constructorsTable, driversTable, standingTabs } from '../utils/staticTx
 import type { ConstructorsChampionship, DriversChampionship, StandingsProps } from '../utils/types'
 import Loader from '../components/Loader'
 import { standingsCustomStyles } from '../utils/standingsTableStyles'
+import { useRef } from 'react'
+import { useAvailableHeight } from '../hooks/useAvailableHeight'
 
 const Standings = ({ driversStandingsData, driversStandingsLoading, getConstructorData, getConstructorLoading }: StandingsProps) => {
+    const standingTable = useRef(null)
+    const height = useAvailableHeight(standingTable, 20)
     const { standingType, updateStandingType } = useCommon()
     const handleStandingType = (standingType: string) => {
         updateStandingType?.(standingType)
@@ -19,7 +23,9 @@ const Standings = ({ driversStandingsData, driversStandingsLoading, getConstruct
             </div>
 
             {/* TABLE */}
-            {standingType === 'drivers' ? (driversStandingsLoading ? (<Loader sizeVal={40} />) : (<DataTable<DriversChampionship> columns={driversTable} data={driversStandingsData ?? []} customStyles={standingsCustomStyles} striped />)) : standingType === 'constructors' ? (getConstructorLoading ? (<Loader sizeVal={40} />) : (<DataTable<ConstructorsChampionship> columns={constructorsTable} data={getConstructorData ?? []} customStyles={standingsCustomStyles} striped />)) : null}
+            <div ref={standingTable} style={{ maxHeight: height, overflowY: 'auto' }}>
+                {standingType === 'drivers' ? (driversStandingsLoading ? (<Loader sizeVal={40} />) : (<DataTable<DriversChampionship> columns={driversTable} data={driversStandingsData ?? []} customStyles={standingsCustomStyles} striped />)) : standingType === 'constructors' ? (getConstructorLoading ? (<Loader sizeVal={40} />) : (<DataTable<ConstructorsChampionship> columns={constructorsTable} data={getConstructorData ?? []} customStyles={standingsCustomStyles} striped />)) : null}
+            </div>
         </div>
     )
 }

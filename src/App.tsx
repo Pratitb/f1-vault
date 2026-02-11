@@ -5,7 +5,7 @@ import Menu from "./components/Menu";
 import { getData } from "./utils/fetchData";
 import { useCommon } from "./context/Common/CommonContext";
 import Banner from "./components/Banner";
-import { useAvailableHeight } from "./hooks/useAvailableHeight";
+// import { useAvailableHeight } from "./hooks/useAvailableHeight";
 import { useEffect, useRef } from "react";
 import Sidebar from "./components/Sidebar";
 import { useMediaQuery } from "react-responsive";
@@ -16,12 +16,13 @@ import Seasons from "./pages/Seasons";
 import Home from "./pages/Home";
 // import Race from "./pages/Race";
 import Standings from "./pages/Standings";
+import Dropdown from "./components/Dropdown";
 
 const App = () => {
   const { selectedYear, activeMenu, updateActiveMenu } = useCommon()
   const { standingType } = useCommon()
   const main = useRef<HTMLDivElement | null>(null)
-  const availableHeight = useAvailableHeight(main, 20)
+  // const availableHeight = useAvailableHeight(main, 20)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
   const location = useLocation()
 
@@ -75,14 +76,15 @@ const App = () => {
     <>
       <div className="p-4 lg:flex lg:gap-8">
         {!isMobile && <Sidebar />}
-        {isMobile && <>
-          <Header />
-        </>}
+        {isMobile && <Header />}
         <div className="flex flex-col gap-4 flex-1">
           <Banner name={activeMenu} />
-          <p className="capitalize font-semibold text-xl">showing data for {selectedYear}</p>
+          <div className="flex items-center gap-4">
+            {isMobile && <Dropdown />}
+            <p className="capitalize font-semibold text-xl">showing data for {selectedYear}</p>
+          </div>
           {isMobile && <Menu />}
-          <div ref={main} style={{ maxHeight: availableHeight, overflow: 'hidden auto' }}>
+          <div ref={main}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />

@@ -14,13 +14,13 @@ export const standingTabs = ['drivers', 'constructors']
 
 export const driversTable = [
     { name: 'position', maxWidth: '200px', center: true, selector: (row: DriversChampionship) => row?.position },
-    { name: 'full name', selector: (row: DriversChampionship) => `${row?.driver?.name} ${row?.driver?.surname}` },
+    { name: 'full name', minWidth: '200px', selector: (row: DriversChampionship) => `${row?.driver?.name} ${row?.driver?.surname}` },
     { name: 'wins', maxWidth: '200px', center: true, selector: (row: DriversChampionship) => row?.wins },
     { name: 'points', maxWidth: '200px', center: true, selector: (row: DriversChampionship) => row?.points },
 ]
 export const constructorsTable = [
     { name: 'position', maxWidth: '200px', center: true, selector: (row: ConstructorsChampionship) => row?.position ?? 0 },
-    { name: 'team', selector: (row: ConstructorsChampionship) => row?.team?.teamName ?? '-' },
+    { name: 'team', minWidth: '200px', selector: (row: ConstructorsChampionship) => row?.team?.teamName ?? '-' },
     { name: 'wins', maxWidth: '200px', center: true, selector: (row: ConstructorsChampionship) => row?.wins ?? 'NA' },
     { name: 'points', maxWidth: '200px', center: true, selector: (row: ConstructorsChampionship) => row?.points ?? 'NA' },
 ]

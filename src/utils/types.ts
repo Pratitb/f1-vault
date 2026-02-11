@@ -13,6 +13,9 @@ export interface SeasonDataProps {
     season?: number
     championship?: Championship
     races?: RaceType[]
+    drivers_championship?: DriversChampionship[]
+    constructors_championship?: ConstructorsChampionship[]
+
 }
 
 export interface Championship {
@@ -122,6 +125,24 @@ export interface TeamWinner {
     driversChampionships?: number
     url?: string
 }
+export interface DriversChampionship {
+    classificationId: number
+    driverId: string
+    teamId: string
+    points: number
+    position: number
+    wins: number
+    driver: DriverType
+    team: TeamWinner
+}
+export interface ConstructorsChampionship {
+    classificationId: number
+    teamId: string
+    points: number
+    position: number
+    wins: number
+    team: TeamWinner
+}
 
 // PAST SEASON
 export interface PastSeasonType {
@@ -167,6 +188,8 @@ export interface DriverCardProps {
 
 
 export interface RaceContextProps {
+    raceRound?: number | null
+    updateRaceRound?: (round: number | null) => void
     seasonYear?: number
     updateSeasonYear?: (value: number) => void
     seasonData?: SeasonDataProps
@@ -201,6 +224,8 @@ export interface MenuLinkType {
 }
 
 export interface CommonContextProps {
+    standingType?: string
+    updateStandingType?: (standing: string) => void
     selectedYear?: number
     updateSelectedYear?: (year: number) => void
     activeMenu?: string
@@ -239,4 +264,34 @@ export interface MenuItemProps {
     linkName?: string
     getActionFn: () => void
     linkIcon?: ReactNode
+    activeItem?: boolean
+    tabVariant?: TabVariant
+}
+
+export const buttonVariants = {
+    primary: 'bg-gray-700 text-white font-semibold px-8',
+    secondary: 'bg-gray-200 text-black',
+    tertiary: 'bg-transparent text-bgPrime',
+} as const;
+export type ButtonVariant = keyof typeof buttonVariants;
+
+export interface ButtonProps {
+    trailingIcon?: React.ReactNode
+    name?: string
+    leadingIcon?: React.ReactNode
+    variant?: ButtonVariant
+    getActionFn?: () => void
+}
+
+export interface TabProps {
+    name?: string
+}
+
+export type TabVariant = 'primary' | 'secondary'
+
+export interface StandingsProps {
+    driversStandingsData?: DriversChampionship[]
+    driversStandingsLoading?: boolean
+    getConstructorData?: ConstructorsChampionship[]
+    getConstructorLoading?: boolean
 }

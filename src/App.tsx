@@ -14,9 +14,12 @@ import Races from "./pages/Races";
 import Drivers from "./pages/Drivers";
 import Seasons from "./pages/Seasons";
 import Home from "./pages/Home";
+// import Race from "./pages/Race";
+import Standings from "./pages/Standings";
 
 const App = () => {
   const { selectedYear, activeMenu, updateActiveMenu } = useCommon()
+  const { standingType } = useCommon()
   const main = useRef<HTMLDivElement | null>(null)
   const availableHeight = useAvailableHeight(main, 20)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
@@ -27,10 +30,9 @@ const App = () => {
     updateActiveMenu?.(path)
   })
 
-
   // RACES
   const { data: currentData, isLoading: isCurrentLoading, isError: isCurrentError } = useQuery<SeasonDataProps>({
-    queryKey: ['current-season'],
+    queryKey: ['current-season', selectedYear],
     queryFn: () => getData<SeasonDataProps>(`${selectedYear}`),
     // queryFn: () => getData<SeasonDataProps>('current'),
     enabled: activeMenu?.includes('races')
@@ -40,7 +42,7 @@ const App = () => {
 
   // DRIVERS
   const { data: driversData, isLoading: isDriversLoading, isError: isDriversError } = useQuery<DriversDataType>({
-    queryKey: ['drivers'],
+    queryKey: ['drivers', selectedYear],
     queryFn: () => getData<DriversDataType>(`${selectedYear}/drivers`),
     enabled: activeMenu?.includes('drivers')
   })
@@ -54,6 +56,21 @@ const App = () => {
   })
   const seasons = seasonsData?.championships
 
+  // STANDINGS
+  const { data: driversStandings, isLoading: driversStandingsLoading } = useQuery<SeasonDataProps>({
+    queryKey: ['driverStandings', selectedYear],
+    queryFn: () => getData<SeasonDataProps>(`${selectedYear}/drivers-championship`),
+    enabled: standingType === 'drivers'
+  })
+  const finalDriversStandings = driversStandings?.drivers_championship
+
+  const { data: constructorStandings, isLoading: constructorStandingsLoading } = useQuery<SeasonDataProps>({
+    queryKey: ['constructorStandings', selectedYear],
+    queryFn: () => getData<SeasonDataProps>(`${selectedYear}/constructors-championship`),
+    enabled: standingType === 'constructors'
+  })
+  const finalConstructorStandings = constructorStandings?.constructors_championship
+
   return (
     <>
       <div className="p-4 lg:flex lg:gap-8">
@@ -61,15 +78,18 @@ const App = () => {
         {isMobile && <>
           <Header />
         </>}
-        <div className="flex flex-col gap-8 flex-1">
+        <div className="flex flex-col gap-4 flex-1">
           <Banner name={activeMenu} />
+          <p className="capitalize font-semibold text-xl">showing data for {selectedYear}</p>
           {isMobile && <Menu />}
           <div ref={main} style={{ maxHeight: availableHeight, overflow: 'hidden auto' }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path='/races' element={<Races getCurrentError={isCurrentError} getCurrentLoading={isCurrentLoading} getRaceData={raceData} getSeasonYear={seasonYear} />} />
+              {/* <Route path='/races/:year/:round' element={<Race />} /> */}
               <Route path='/drivers' element={<Drivers getDriversData={drivers} getDriversError={isDriversError} getDriversLoading={isDriversLoading} />} />
+              <Route path="/standings" element={<Standings driversStandingsData={finalDriversStandings} driversStandingsLoading={driversStandingsLoading} getConstructorLoading={constructorStandingsLoading} getConstructorData={finalConstructorStandings} />} />
               <Route path='/seasons' element={<Seasons getSeaonsData={seasons} getSeasonsError={isSeasonsError} getSeasonsLoading={isSeasonsLoading} />} />
             </Routes>
           </div>

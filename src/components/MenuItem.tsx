@@ -1,12 +1,15 @@
-import { useCommon } from '../context/Common/CommonContext'
 import type { MenuItemProps } from '../utils/types'
 
-const MenuItem = ({ linkName, getActionFn, linkIcon }: MenuItemProps) => {
-    const { activeMenu } = useCommon()
+const MenuItem = ({ linkName, getActionFn, linkIcon, activeItem, tabVariant = 'primary' }: MenuItemProps) => {
+
+    const menuItemMap = {
+        primary: 'font-medium text-lg px-4 py-1',
+        secondary: 'font-normal text-sm px-3 py-1'
+    }
     return (
-        <div className={`bg-gray-100 font-medium capitalize px-4 py-1 lg:py-2 border-2 rounded-lg shadow cursor-pointer ${activeMenu?.includes?.(linkName ?? '') ? 'border-red text-red bg-white ' : ''}`} onClick={getActionFn}>
+        <div className={`bg-gray-100 capitalize  border-2 rounded-lg shadow cursor-pointer ${activeItem ? 'border-red text-red bg-white ' : ''}`} onClick={getActionFn}>
             {linkIcon && <>{linkIcon}</>}
-            <p className={`whitespace-nowrap text-xl ${activeMenu?.includes?.(linkName ?? '') ? 'border-red text-red bg-white ' : ''}`}>{linkName}</p>
+            <p className={`whitespace-nowrap ${menuItemMap[tabVariant]} `}>{linkName}</p>
         </div>
     )
 }

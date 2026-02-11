@@ -5,7 +5,7 @@ import type { MenuLinkType } from '../utils/types'
 import MenuItem from './MenuItem'
 
 const Menu = () => {
-    const { updateActiveMenu } = useCommon()
+    const { activeMenu, updateActiveMenu } = useCommon()
     const navigate = useNavigate()
     const handleActiveMenuItem = (menuItem: string) => {
         updateActiveMenu?.(menuItem)
@@ -13,7 +13,7 @@ const Menu = () => {
     }
     return (
         <div className='flex gap-2 max-w-fit overflow-x-auto'>
-            {menuLinks?.map((link: MenuLinkType) => <MenuItem key={link?.name} linkName={link?.name} getActionFn={() => handleActiveMenuItem?.(link?.name ?? '')} />)}
+            {menuLinks?.map((link: MenuLinkType) => <MenuItem key={link?.name} linkName={link?.name} activeItem={activeMenu?.includes(link?.name ?? '')} getActionFn={() => handleActiveMenuItem?.(link?.name ?? '')} />)}
         </div>
     )
 }

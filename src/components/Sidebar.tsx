@@ -7,7 +7,7 @@ import MenuItem from './MenuItem'
 import Dropdown from './Dropdown'
 
 const Sidebar = () => {
-    const { updateActiveMenu } = useCommon()
+    const { activeMenu, updateActiveMenu } = useCommon()
     const navigate = useNavigate()
 
     const handleActiveMenuItem = (menuItem: string) => {
@@ -20,7 +20,7 @@ const Sidebar = () => {
             <img src={Logo} alt="" />
             <Dropdown />
             <div className='flex flex-col gap-4'>
-                {menuLinks?.map?.((link: MenuLinkType) => <MenuItem key={link?.name} linkName={link?.name} getActionFn={() => handleActiveMenuItem?.(link?.name ?? '')} />)}
+                {menuLinks?.map?.((link: MenuLinkType) => <MenuItem key={link?.name} linkName={link?.name} activeItem={activeMenu?.includes(link?.name ?? '')} getActionFn={() => handleActiveMenuItem?.(link?.name ?? '')} />)}
             </div>
         </div>
     )

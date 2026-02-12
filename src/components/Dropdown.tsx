@@ -22,7 +22,7 @@ const Dropdown = () => {
             </div>
             {/* Options */}
             <div className={`${optionsVisible ? 'h-40 p-2' : 'h-0'} overflow-y-auto`}>
-                {seasonYears?.reverse()?.map((year: number) => <p key={year} className="py-1 px-3 rounded-lg hover:bg-red hover:text-white" onClick={() => handleOptionSelect?.(year)}>{year}</p>)}
+                {seasonYears?.map((year: number) => <p key={year} className="py-1 px-3 rounded-lg hover:bg-red hover:text-white" onClick={() => handleOptionSelect?.(year)}>{year}</p>)}
             </div>
         </div>
     )

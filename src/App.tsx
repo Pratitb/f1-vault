@@ -6,7 +6,7 @@ import { getData } from "./utils/fetchData";
 import { useCommon } from "./context/Common/CommonContext";
 import Banner from "./components/Banner";
 import { useAvailableHeight } from "./hooks/useAvailableHeight";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import { useMediaQuery } from "react-responsive";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -17,11 +17,13 @@ import Home from "./pages/Home";
 // import Race from "./pages/Race";
 import Standings from "./pages/Standings";
 import Dropdown from "./components/Dropdown";
+import { seasonYears } from "./utils/staticTxt";
 
 const App = () => {
-  const { selectedYear, activeMenu, updateActiveMenu } = useCommon()
+  const { selectedYear, activeMenu, updateActiveMenu, updateSelectedYear } = useCommon()
   const { standingType } = useCommon()
   const main = useRef<HTMLDivElement | null>(null)
+  const [optionsVisible, setOptionsVisible] = useState(false)
   const height = useAvailableHeight(main, 20)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
   const location = useLocation()
@@ -58,6 +60,7 @@ const App = () => {
   const seasons = seasonsData?.championships
 
   // STANDINGS
+  // drivers
   const { data: driversStandings, isLoading: driversStandingsLoading } = useQuery<SeasonDataProps>({
     queryKey: ['driverStandings', selectedYear],
     queryFn: () => getData<SeasonDataProps>(`${selectedYear}/drivers-championship`),
@@ -65,12 +68,22 @@ const App = () => {
   })
   const finalDriversStandings = driversStandings?.drivers_championship
 
+  // constructors
   const { data: constructorStandings, isLoading: constructorStandingsLoading } = useQuery<SeasonDataProps>({
     queryKey: ['constructorStandings', selectedYear],
     queryFn: () => getData<SeasonDataProps>(`${selectedYear}/constructors-championship`),
     enabled: standingType === 'constructors'
   })
   const finalConstructorStandings = constructorStandings?.constructors_championship
+
+  const handleOptionsVisibility = useCallback(() => {
+    setOptionsVisible(!optionsVisible)
+  }, [optionsVisible])
+
+  const handleOptionSelect = useCallback((year: number) => {
+    updateSelectedYear?.(year)
+    setOptionsVisible(false)
+  }, [updateSelectedYear])
 
   return (
     <>
@@ -82,11 +95,11 @@ const App = () => {
         {/* HEADER */}
         {isMobile && <Header />}
         <div className="flex flex-col gap-4 flex-1">
-          <Banner name={activeMenu} />
+          <Banner name={activeMenu} bgColor="bg-red" textColor="text-gray-100" />
 
           {/* DROPDOWN */}
           <div className="flex items-center gap-4">
-            {isMobile && <Dropdown />}
+            {isMobile && <Dropdown getOptionsVisibility={optionsVisible} getOptionsToggle={handleOptionsVisibility} getSelectedOption={handleOptionSelect} getOptions={seasonYears} selectedValue={selectedYear} />}
             <p className="capitalize font-semibold text-xl flex-1">data for {selectedYear}</p>
           </div>
 

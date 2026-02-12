@@ -1,9 +1,10 @@
+import { memo } from "react"
 import type { BannerProps } from "../utils/types"
 
-const Banner = ({ name }: BannerProps) => {
+const Banner = ({ bgColor, textColor, name }: BannerProps) => {
     return (
-        <div className='bg-red capitalize text-5xl p-4 rounded-lg flex items-center justify-center break-all md:justify-start text-gray-100 font-semibold italic'>{name}</div>
+        <div className={`${bgColor} text-5xl ${textColor} font-semibold italic capitalize break-all p-4 rounded-lg flex items-center justify-center  md:justify-start`}>{name}</div>
     )
 }
 
-export default Banner
+export default memo(Banner)

@@ -1,6 +1,6 @@
 import { FaFlagCheckered } from "react-icons/fa"
 import type { RaceCompProps } from "../utils/types"
-import Button from "./Button"
+// import Button from "./Button"
 import { useNavigate } from "react-router-dom"
 import { useRace } from "../context/Race/RaceContext"
 
@@ -27,11 +27,11 @@ const RaceCard = ({ year, round, laps, location, name, winner }: RaceCompProps) 
                 <p className=" text-sm leading-5">{location}</p>
             </div>
             {/* winner */}
-            <div className="flex items-center gap-2 font-bold text-2xl mb-4">
+            <div className="flex items-center gap-2 font-bold text-3xl mb-4">
                 <FaFlagCheckered />
-                <p className="md:text-lg md:leading-5">{winner}</p>
+                <p className="lg: text-2xl">{winner}</p>
             </div>
-            <Button variant="primary" name="details" />
+            {/* <Button variant="primary" name="details" /> */}
         </div>
     )
 }

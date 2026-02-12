@@ -5,7 +5,7 @@ import Menu from "./components/Menu";
 import { getData } from "./utils/fetchData";
 import { useCommon } from "./context/Common/CommonContext";
 import Banner from "./components/Banner";
-// import { useAvailableHeight } from "./hooks/useAvailableHeight";
+import { useAvailableHeight } from "./hooks/useAvailableHeight";
 import { useEffect, useRef } from "react";
 import Sidebar from "./components/Sidebar";
 import { useMediaQuery } from "react-responsive";
@@ -22,7 +22,7 @@ const App = () => {
   const { selectedYear, activeMenu, updateActiveMenu } = useCommon()
   const { standingType } = useCommon()
   const main = useRef<HTMLDivElement | null>(null)
-  // const availableHeight = useAvailableHeight(main, 20)
+  const height = useAvailableHeight(main, 20)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
   const location = useLocation()
 
@@ -75,16 +75,26 @@ const App = () => {
   return (
     <>
       <div className="p-4 lg:flex lg:gap-8">
+
+        {/* SIDEBAR */}
         {!isMobile && <Sidebar />}
+
+        {/* HEADER */}
         {isMobile && <Header />}
         <div className="flex flex-col gap-4 flex-1">
           <Banner name={activeMenu} />
+
+          {/* DROPDOWN */}
           <div className="flex items-center gap-4">
             {isMobile && <Dropdown />}
-            <p className="capitalize font-semibold text-xl">showing data for {selectedYear}</p>
+            <p className="capitalize font-semibold text-xl">data for {selectedYear}</p>
           </div>
+
+          {/* MOBILE MENU */}
           {isMobile && <Menu />}
-          <div ref={main}>
+
+          {/* MAIN */}
+          <div ref={main} style={{ height, overflowY: 'auto' }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />

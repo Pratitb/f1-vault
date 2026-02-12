@@ -87,7 +87,7 @@ const App = () => {
           {/* DROPDOWN */}
           <div className="flex items-center gap-4">
             {isMobile && <Dropdown />}
-            <p className="capitalize font-semibold text-xl">data for {selectedYear}</p>
+            <p className="capitalize font-semibold text-xl flex-1">data for {selectedYear}</p>
           </div>
 
           {/* MOBILE MENU */}

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import type { ContextProps } from "../../utils/types"
 import { CommonContext } from "./CommonContext"
 
@@ -16,9 +16,9 @@ export const CommonProvider = ({ children }: ContextProps) => {
         setActiveMenu(value)
     }
 
-    const updateSelectedYear = (year: number) => {
+    const updateSelectedYear = useCallback((year: number) => {
         setSelectedYear(year)
-    }
+    }, [])
 
     return (
         <CommonContext.Provider value={{ standingType, updateStandingType, selectedYear, updateSelectedYear, activeMenu, updateActiveMenu }}>

@@ -240,6 +240,8 @@ export interface SeasonCardProps {
 
 export interface BannerProps {
     name?: string
+    bgColor?: string
+    textColor?: string
 }
 export interface RacePageProps {
     getRaceData?: RaceType[]
@@ -294,4 +296,11 @@ export interface StandingsProps {
     driversStandingsLoading?: boolean
     getConstructorData?: ConstructorsChampionship[]
     getConstructorLoading?: boolean
+}
+export interface DropdownProps {
+    getOptionsVisibility?: boolean
+    getOptionsToggle?: () => void
+    selectedValue?: string | number
+    getOptions?: number[]
+    getSelectedOption?: (year: number) => void
 }

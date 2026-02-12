@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { Logo } from "../utils/assets"
 
 const Header = () => {
@@ -8,4 +9,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default memo(Header)

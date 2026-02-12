@@ -1,5 +1,6 @@
 import { ThreeDots } from 'react-loader-spinner'
 import type { LoaderProps } from '../utils/types'
+import { memo } from 'react'
 
 const Loader = ({ sizeVal }: LoaderProps) => {
     return (
@@ -7,4 +8,4 @@ const Loader = ({ sizeVal }: LoaderProps) => {
     )
 }
 
-export default Loader
+export default memo(Loader)

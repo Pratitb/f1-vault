@@ -99,8 +99,8 @@ const App = () => {
 
           {/* DROPDOWN */}
           <div className="flex items-center gap-4">
-            {isMobile && <Dropdown getOptionsVisibility={optionsVisible} getOptionsToggle={handleOptionsVisibility} getSelectedOption={handleOptionSelect} getOptions={seasonYears} selectedValue={selectedYear} />}
-            <p className="capitalize font-semibold text-xl flex-1">data for {selectedYear}</p>
+            {<Dropdown getOptionsVisibility={optionsVisible} getOptionsToggle={handleOptionsVisibility} getSelectedOption={handleOptionSelect} getOptions={seasonYears} selectedValue={selectedYear} />}
+            {/* <p className="capitalize font-semibold text-xl flex-1">data for {selectedYear}</p> */}
           </div>
 
           {/* MOBILE MENU */}
